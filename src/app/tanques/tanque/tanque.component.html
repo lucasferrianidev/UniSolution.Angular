@@ -1,0 +1,12 @@
+<div class="card bg-light mb-3 center tanque borda-colorida" style="max-width: 18rem;">
+    <div class="card-header">
+        {{ deposito }}
+        <a [routerLink]="['/adicionar', deposito]">
+            <i class="fa fa-edit fa-2x pull-right"></i>
+        </a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Capacidade: {{ capacidade }}</h5>
+        <p class="card-text">Tipo do Produto: {{ tipoDeProduto }}</p>
+    </div>
+</div>

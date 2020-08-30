@@ -1,0 +1,5 @@
+[ 
+    { "deposito": "oi", "capacidade": 33.33, "tipoProduto": "primeiro" },
+    { "deposito": "ola", "capacidade": 44.44, "tipoProduto": "segundo" },
+    { "deposito": "hello", "capacidade": 55.55, "tipoProduto": "terceiro" }
+]

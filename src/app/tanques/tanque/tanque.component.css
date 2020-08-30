@@ -1,0 +1,12 @@
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.borda-colorida {
+  border: 1.5px solid #494646;
+}
+.borda-colorida:hover {
+  border: 1.5px solid #cf7309;
+}

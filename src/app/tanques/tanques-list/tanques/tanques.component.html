@@ -1,0 +1,15 @@
+<ol class="list-unstyled">
+    <li *ngFor='let tanques of rows' class="row no-gutters">
+        <div *ngFor='let tanque of tanques' class="col-6">
+            <us-tanque
+                [deposito]="tanque.Deposito"
+                [capacidade]="tanque.Capacidade"
+                [tipoDeProduto]="tanque.TipoDeProduto">
+            </us-tanque>
+            
+        </div>
+    </li>
+</ol>
+<p class="text-center text-muted" *ngIf="!tanques.length">
+    Nenhum resultado encontrado!
+</p>

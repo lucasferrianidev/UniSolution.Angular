@@ -1,0 +1,67 @@
+<h3 class="text-center mt-3"> {{ titulo }} </h3>
+
+<form [formGroup]="tanqueForm" class="form mt-4" (submit)="submeterDados()">
+    <div class="form-group">
+        <input 
+            #depositoInputDOM 
+            formControlName="deposito" 
+            placeholder="Depósito" 
+            class="form-control"
+            autofocus>
+        <us-vmessage
+            text="Depósito é obrigatório!"
+            *ngIf="tanqueForm.get('deposito').errors?.required">
+        </us-vmessage>
+
+        <ap-vmessage
+            text="Depósito já utilizado!"
+            *ngIf="tanqueForm.get('deposito').errors?.verificaDepositoNaoExistente">
+        </ap-vmessage>
+        <small *ngIf="tanqueForm.get('deposito').valid" class="text-success">Depósito disponível!</small>    
+    </div>
+
+    <div class="form-group">
+        <input 
+            formControlName="capacidade" 
+            placeholder="Capacidade" 
+            class="form-control" >
+        <us-vmessage
+            text="Capacidade é obrigatória!"
+            *ngIf="tanqueForm.get('capacidade').errors?.required">
+        </us-vmessage>
+        <us-vmessage
+            text="Capacidade deve maior que zero!"
+            *ngIf="tanqueForm.get('capacidade').errors?.min">
+        </us-vmessage> 
+    </div>
+
+    <div class="form-group">
+        <input 
+            formControlName="tipoDeProduto" 
+            placeholder="Tipo de Produto" 
+            class="form-control">
+        <us-vmessage
+            text="Tipo de Prduto é obrigatório!"
+            *ngIf="tanqueForm.get('tipoDeProduto').errors?.required">
+        </us-vmessage>
+    </div>
+
+    <div class="row">
+        <div class="col-10">
+            <button 
+                [disabled]="tanqueForm.invalid || tanqueForm.pending" 
+                class="btn btn-primary btn-block">
+                Gravar
+            </button>
+            <button 
+                class="btn btn-block" 
+                [routerLink]="['/listar']">
+                Cancelar
+            </button>
+        </div>
+        <div *ngIf="estaAlterando == true" class="col-2">
+            <i (click)="remover(deposito)" class="fa fa-trash-o fa-4x pull-right"></i>
+        </div>
+    </div>
+</form>
+
