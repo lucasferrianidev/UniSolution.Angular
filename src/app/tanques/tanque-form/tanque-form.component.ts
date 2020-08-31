@@ -1,14 +1,12 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { TanqueFormService } from './tanque-form.service';
-import { DepositoNaoExistenteValidatorService } from './deposito-nao-existente.validator.service';
-import { TanqueService } from '../tanque/tanque.service';
 import { Tanque } from '../tanque/tanque';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { HostListener } from '@angular/core';
+import { DepositoNaoExistenteValidatorService } from '../../shared/components/validators/deposito-nao-existente.validator.service';
+
 
 
 @Component({
@@ -26,9 +24,8 @@ export class TanqueFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private tanqueFormService: TanqueFormService,
     private router: Router,
-    private depositoNaoExistenteValidatorService: DepositoNaoExistenteValidatorService,
     private route: ActivatedRoute,
-    private tanqueService: TanqueService
+    private depositoValidator: DepositoNaoExistenteValidatorService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +33,8 @@ export class TanqueFormComponent implements OnInit {
     this.tanqueForm = this.formBuilder.group({
       deposito: [
         '',
-        Validators.required
+        Validators.required,
+        this.depositoValidator.verificaDepositoNaoExistente() // async validator
       ],
       capacidade: [
         '',
@@ -71,7 +69,6 @@ export class TanqueFormComponent implements OnInit {
   }
 
   submeterDados(): void {
-    console.log('cheguei aqui oh');
     const deposito = this.tanqueForm.get('deposito').value;
     const capacidade = this.tanqueForm.get('capacidade').value;
     const tipoDeProduto = this.tanqueForm.get('tipoDeProduto').value;
@@ -88,32 +85,31 @@ export class TanqueFormComponent implements OnInit {
     this.alteracao$
       .subscribe(
         () => {
-          alert('Gravado com SUCESSO!');
+          alert('Gravado com sucesso!');
           this.router.navigate(['listar']);
         },
         (err) => {
           console.log(err);
           this.tanqueForm.reset();
-          alert('Erro ao gravar! Tente mais tarde novamente.');
+          alert('Erro ao gravar! Tente novamente mais tarde.');
         }
       );
   }
 
   remover(deposito: string): void {
-    console.log('log1: ' + deposito);
 
     this.tanqueFormService
         .removeTanque(this.deposito)
         .subscribe(
             () => {
-              console.log('removido com sucesso');
-              alert('Removido com SUCESSO!');
+              console.log('Removido com sucesso!');
+              alert('Removido com sucesso!');
               this.router.navigate(['']);
             },
             err => {
               console.log(err);
-              alert('Erro ao remover Tanque! Tente mais tarde novamente.');
+              alert('Erro tentar remover! Tente novamente mais tarde.');
             }
           );
-}
+  }
 }

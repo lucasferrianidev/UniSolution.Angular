@@ -13,27 +13,22 @@ export class TanqueFormService {
     constructor(private http: HttpClient) { }
 
     gravar(deposito: string, capacidade: string, tipoDeProduto: string): Observable<Tanque> {
-        console.log('vou gravar');
         return this.http.post<Tanque>(API + '/api/tanques', { deposito, capacidade, tipoDeProduto } );
     }
 
     alterar(deposito: string, capacidade: string, tipoDeProduto: string): Observable<Tanque> {
-
         return this.http.put<Tanque>(API + '/api/tanques', { deposito, capacidade, tipoDeProduto } );
     }
 
-    verificaDepositoExiste(deposito: string): Observable<Tanque> {
-
+    verificaDepositoNaoExiste(deposito: string): Observable<Tanque> {
         return this.http.get<Tanque>(API + '/api/tanques/' + deposito);
     }
 
     getDepositoById(deposito: string): Observable<Tanque> {
-
         return this.http.get<Tanque>(API + '/api/tanques/' + deposito);
     }
 
     removeTanque(deposito: string): Observable<Tanque> {
-
         return this.http.delete<Tanque>(API + '/api/tanques/' + deposito);
     }
 }

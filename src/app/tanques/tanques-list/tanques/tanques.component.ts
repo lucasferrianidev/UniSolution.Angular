@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
 import { Tanque } from '../../tanque/tanque';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'us-tanques',
   templateUrl: './tanques.component.html',
   styleUrls: ['./tanques.component.css']
@@ -15,8 +15,6 @@ export class TanquesComponent implements OnChanges {
   // property que será usada para iterar e acessar os dados dos tanques
   rows: Tanque[] =  [];
 
-  constructor() { }
-
   // precisei usar o OnChanges pois com OnInit ele era executado uma vez só, antes de ter o resultado
   ngOnChanges(changes: SimpleChanges): void {
     this.rows = this.groupColumns(this.tanques);
@@ -25,11 +23,12 @@ export class TanquesComponent implements OnChanges {
   // faz uma separação dos tanques e divide em linhas de 2 tanques
   groupColumns(tanques: Tanque[]): Tanque[] {
     const newRows = [];
-
-    for (let index = 0; index < tanques.length; index += 2){
-      newRows.push(tanques.slice(index, index + 3));
+    // empurra para o newRows uma "fatia" do array de Tanque, dependendo do incremente teremos mais ou menos tanques em uma linha
+    if (tanques !== null) {
+      for (let index = 0; index < tanques.length; index += 2){
+        newRows.push(tanques.slice(index, index + 2));
+      }
     }
-
     return newRows;
   }
 

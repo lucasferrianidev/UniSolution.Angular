@@ -1,15 +1,25 @@
 <div class="text-right mt-3 mb-3 mr-3">
-    <form>
-        <i aria-hidden="true" class="fa fa-search mr-2"></i>
-        <input
-            class="rounded"
-            type="search"
-            placeholder=" pesquisar..."
-            autofocus
-            (keyup)="debounce.next($event.target.value)"
-            >
-    </form>
+    <div class="row">
+        <div class="col-10">
+            <form>
+                <i aria-hidden="true" class="fa fa-search mr-2"></i>
+                <input
+                    class="rounded"
+                    type="search"
+                    placeholder=" pesquisar..."
+                    autofocus
+                    (keyup)="debounce.next($event.target.value)"
+                    >
+            </form>
+        </div>
+        <div class="col-2">
+            <button 
+                class="btn btn-primary btn-block" 
+                [routerLink]="['/adicionar']">
+                Novo Tanque
+            </button>
+        </div>
+    </div>
 </div>
-<a [routerLink]="['/adicionar']">Novo Tanque</a>
 
 <us-tanques [tanques]="tanques | filterByDeposito: filtro"></us-tanques>

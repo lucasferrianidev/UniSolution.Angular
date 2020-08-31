@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { VMessageComponent } from './vmessage.component';
 

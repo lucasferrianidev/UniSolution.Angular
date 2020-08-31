@@ -13,11 +13,9 @@
             *ngIf="tanqueForm.get('deposito').errors?.required">
         </us-vmessage>
 
-        <ap-vmessage
-            text="Depósito já utilizado!"
-            *ngIf="tanqueForm.get('deposito').errors?.verificaDepositoNaoExistente">
-        </ap-vmessage>
-        <small *ngIf="tanqueForm.get('deposito').valid" class="text-success">Depósito disponível!</small>    
+        <small *ngIf="tanqueForm.get('deposito').valid" class="text-success">Depósito <b>DISPONÍVEL</b> !</small>
+        <small *ngIf="(tanqueForm.get('deposito').errors?.depositoExistente && estaAlterando == false)" class="text-danger">Depósito <b>INDISPONÍVEL</b> !</small>
+
     </div>
 
     <div class="form-group">

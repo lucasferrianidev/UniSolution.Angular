@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { TanqueService } from './tanque.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import { TanqueService } from './tanque.service';
 
 @Component({
     selector: 'us-tanque',
@@ -14,13 +14,4 @@ export class TanqueComponent {
     @Input() deposito = '';
     @Input() capacidade = '';
     @Input() tipoDeProduto = '';
-
-    constructor(
-        private tanqueService: TanqueService,
-        private router: Router
-    ) { }
-
-    editar(): void {
-      console.log('editar');
-    }
 }

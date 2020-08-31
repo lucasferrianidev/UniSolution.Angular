@@ -11,8 +11,6 @@ export class TanqueService{
     constructor(private http: HttpClient) { }
 
     getAll(): Observable<Tanque[]> {
-
-        return this.http
-            .get<Tanque[]>(API + '/api/tanques');
+        return this.http.get<Tanque[]>(API + '/api/tanques');
     }
 }
